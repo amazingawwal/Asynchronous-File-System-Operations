@@ -86,24 +86,69 @@ const fs = require('fs/promises');
 // appendFileAsync(existingFilename, appendContent);
 
 
-// Task 5: List Directory Contents with Async/Await
-const dirPath = './test-files/';
-async function listDirectoryAsync(dirPath){
+// // Task 5: List Directory Contents with Async/Await
+// const dirPath = './test-files/';
+// async function listDirectoryAsync(dirPath){
+//     try {
+//         const files = await fs.readdir(dirPath);
+//         files.forEach(async file=>{
+//             const fileStat = await fs.stat(`${dirPath}${file}`);
+//             console.log(`File Name: ${file}`)
+//             if (fileStat.isDirectory()) {
+//                 console.log(`File Type: Directory`)
+//             }
+//             else{
+//             console.log(`File Type: Text File`)};
+//             console.log(`File Size: ${fileStat.size}`);
+//         })
+//     } catch (error) {
+//         console.log(error);
+//     }
+// };
+
+// listDirectoryAsync(dirPath)
+
+
+// // Task 6: Create and Delete Operations with Async/Await
+
+// // Create Directory Temp
+// const createDirPath = './test-files/temp';
+// async function createDirectoryAsync(dirPath){
+//     try {
+//         await fs.mkdir(dirPath)
+//     } catch (error) {
+//         console.log(`Error while creating Directory`)
+//     }
+// };
+
+// createDirectoryAsync(createDirPath);
+
+
+// // Create File with content
+// const fileContent = 'temporary file'; 
+// const contentFilename = './test-files/temp/test.txt';
+
+// async function createFileAsync (contentFilename, fileContent){
+//     try {
+//         await fs.writeFile(contentFilename, fileContent);
+//         console.log(` ${contentFilename} created successfully !`);
+//     } catch (err) {
+//         console.log('Error writing file', err);
+//     }
+// };
+
+// createFileAsync(contentFilename, fileContent);
+
+
+// Function to delete file
+const unlinkPath = './test-files/temp/test.txt'
+async function  deleteFileAsync(filename){
     try {
-        const files = await fs.readdir(dirPath)
-        files.forEach(async file=>{
-            const fileStat = await fs.stat(`${dirPath}${file}`);
-            console.log(`File Name: ${file}`)
-            if (fileStat.isDirectory()) {
-                console.log(`File Type: Directory`)
-            }
-            else{
-            console.log(`File Type: Text File`)};
-            console.log(`File Size: ${fileStat.size}`);
-        })
+        await fs.unlink(filename)
+        console.log(`File deleted successfully`);
     } catch (error) {
-        console.log(error);
+        console.log(`Error deleting file`);
     }
 };
 
-listDirectoryAsync(dirPath)
+deleteFileAsync(unlinkPath)
