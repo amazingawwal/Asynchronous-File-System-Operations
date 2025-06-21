@@ -7,7 +7,7 @@ async function readFileAsync(filename) {
     const data = await fs.readFile(filename, 'utf-8');
     console.log(data);
   } catch (err) {
-    console.error('Error - unable to read file:', err);
+    console.error(`Error - unable to read file: ${filename}`, err);
   }
 }
 
@@ -25,7 +25,7 @@ readFileAsync('./test-files/sample.txt');
 //                                       }
 
 
-// Task 2: Write Content to File with Async/Await
+// Task 2: Write Content to File with Async/Await function
 
 const fsw = require('fs/promises');
 
@@ -35,7 +35,7 @@ const filename = './test-files/output.txt';
 async function writeFileAsync (filename, content){
     try {
         await fsw.writeFile(filename, content);
-        console.log('File written successfully!');
+        console.log(`Content: ${content} written successfully to ${filename}!`);
     } catch (err) {
         console.log('Error writing file', err);
     }
@@ -44,4 +44,19 @@ async function writeFileAsync (filename, content){
 writeFileAsync(filename, content);
 
 
-// Task 3: Copy File from Source to Destination
+// Task 3: Copy File from Source to Destination with Async/Await
+
+const source = './test-files/sample.txt';
+const destination = './test-files/backup/sample_backup.txt';
+
+async function copyFileAsync(source, destination){
+    try {
+        if (source && destination) 
+            await fs.copyFile(source, destination);
+            console.log(`Successfully copied file from source:${source} to destination ${destination} `);
+    } catch (error) {
+        console.log('Error copying file from source to destination ');
+    }
+};
+
+copyFileAsync(source, destination);
