@@ -60,3 +60,27 @@ async function copyFileAsync(source, destination){
 };
 
 copyFileAsync(source, destination);
+
+
+// Task 4: Append Content to Existing File with Async/Await
+
+const existingFilename = './test-files/output.txt'
+const appendContent = '\nAppended line 1\nAppended line 2'
+
+async function appendFileAsync(existingFilename, appendContent){
+    try {
+        await fs.access(existingFilename);
+        let data1 = await fs.readFile(existingFilename, 'utf-8');
+        console.log(`Existing file content is: ${data1}`)
+        await fs.appendFile(existingFilename, appendContent);
+        let data2 = await fs.readFile(existingFilename, 'utf-8');
+        console.log(`With appended content is: ${data2}`)
+    } catch  {
+        await fs.open(existingFilename, 'w');
+        await fs.appendFile(existingFilename, appendContent);
+        let data = await fs.readFile(existingFilename, 'utf-8');
+        console.log(`Appended content is: ${data}`)
+    }
+};
+
+appendFileAsync(existingFilename, appendContent);
